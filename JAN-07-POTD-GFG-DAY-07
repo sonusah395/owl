@@ -1,0 +1,33 @@
+    int getPartition(int arr[], int N, int mid){
+        int cnt = 1;
+        int s = 0;
+        for(int i=0;i<N;i++){
+            if(arr[i]+s <= mid){
+                s += arr[i];
+            }else{
+                cnt++;
+                s = arr[i];
+            }
+        }
+        return cnt;
+    }
+    int splitArray(int arr[] ,int N, int K) {
+        // code here
+        int max = INT_MIN, sum = 0;
+        for(int i=0;i<N;i++){
+            if(arr[i]>max)
+            max = arr[i];
+            sum += arr[i];
+        }
+        int low = max;
+        int high = sum;
+        
+        while(low<=high){
+            int mid = (low + high)/2;
+            int partition = getPartition(arr, N, mid);
+            if(partition > K)
+                low = mid + 1;
+            else
+                high = mid - 1;
+        }
+        return low;
