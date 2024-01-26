@@ -1,0 +1,67 @@
+class Solution {
+public:
+    vector<int> findErrorNums(vector<int>& nums) {
+        // int xoro=0;
+        // int n=nums.size();
+        // for(int i=0;i<n;i++){
+        //     xoro^=nums[i];
+        //     xoro^=(i+1);
+        // }
+        // // cout <<xoro<<" ";
+        // // for(int i=1;i<=n;i++){
+        // //     xoro^=i;
+        // // }
+        // // cout<<xoro<<" ";
+
+        // int right_mostset_bit=(xoro&(-xoro));
+        // int x=0;
+        // int y=0;
+        // for(int val:nums){
+        //     if((val & (right_mostset_bit))){
+        //         x=x^val;
+        //     }else{
+        //         y=y^val;
+        //     }
+        // }
+
+        // for(int i=1;i<=n;i++){
+        //     if((i&right_mostset_bit)==0){
+        //         x= x^i;
+        //     }else{
+        //         y = y^i;
+        //     }
+        // }
+        // // cout<<x<<" "<<y;
+        // vector<int> ans;
+
+        // for(int val:nums){
+        //     if(val==x){
+        //         ans.push_back(x);
+        //         ans.push_back(y);
+        //         break;
+        //     } else if(val ==y){
+        //         ans.push_back(y);
+        //         ans.push_back(x);
+        //         break;
+        //     }
+        // }
+        // return ans;
+
+        int n = nums.size();
+        int ans = 0;
+        unordered_map<int,int> mp;
+
+        for(int i=0; i<n; i++)
+            mp[nums[i]]++;
+        int actSum = (n*(n+1)/2) ;   
+        int sum = 0;
+
+        for(auto it: mp){
+            if(it.second > 1){
+                ans = it.first; 
+            }
+            sum += it.first; 
+        }
+        return {ans,actSum-sum}; 
+    }
+};
