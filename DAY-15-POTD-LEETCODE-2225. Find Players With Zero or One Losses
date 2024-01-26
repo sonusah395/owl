@@ -1,0 +1,23 @@
+class Solution {
+public:
+    vector<vector<int>> findWinners(vector<vector<int>>& matches) {
+        unordered_map<int,pair<int,int>>mp;
+        for(auto x:matches)
+        {
+            mp[x[0]].first++;
+            mp[x[0]].second++;
+            mp[x[1]].first++;
+        }
+        vector<int>w,l;
+        for(auto x:mp)
+        {
+            if(x.second.first == x.second.second)
+                w.push_back(x.first);
+            if(x.second.first-1 == x.second.second)
+                l.push_back(x.first);
+        }
+        sort(w.begin(),w.end());
+        sort(l.begin(),l.end());
+        return {w,l};
+    }
+};
