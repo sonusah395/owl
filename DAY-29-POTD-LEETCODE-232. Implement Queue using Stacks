@@ -1,0 +1,35 @@
+class MyQueue {
+    private:
+    stack<int> san1;
+    stack<int> san2;
+public:
+    MyQueue() {  
+
+    }
+    
+    void push(int x) {
+        while(!san1.empty()){
+            san2.push(san1.top());
+            san1.pop();
+        }
+        san1.push(x);
+        while(!san2.empty()){
+            san1.push(san2.top());
+            san2.pop();
+        }
+    }
+    
+    int pop() {
+        int temp=san1.top();
+        san1.pop();
+        return temp;
+    }
+    
+    int peek() {
+        return san1.top();
+    }
+    
+    bool empty() {
+        return san1.empty();
+    }
+};
